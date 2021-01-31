@@ -1,0 +1,8 @@
+  h1:hover {
+    cursor: url('../../assets/aa.jpeg'), pointer;
+    width: 220px;
+    height: 320px;
+}   
+body {
+    background-color: lightgray;
+  }

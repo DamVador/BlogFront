@@ -9,9 +9,19 @@ const Home = () => {
     const [cursorY, setCursorY] = useState()
     const [imageName, setImageName] = useState()
 
+
+    const cursor = document.querySelector(".cursor2")
+
     window.addEventListener('mousemove', (e) => {
         setCursorX(e.pageX - 100)
         setCursorY(e.pageY - 150)
+    })
+
+    document.addEventListener('click', (e) => {
+        cursor.classList.add("expand");
+        setTimeout(() => {
+            cursor.classList.remove("expand");
+        }, 500)
     })
 
     const homeFetch = () => {
@@ -65,7 +75,10 @@ const Home = () => {
             <ul style={{zIndex: 1}}>
                  {data.map(elt => <li><h1 className={`${elt.title[elt.title.length-1]}`} onMouseOver={() => changeImage(elt.title[elt.title.length-1])}>{elt.title}</h1></li>)}
              </ul>
-            
+             <div className="cursor2" style={{
+                left: cursorX + 85 + "px",
+                top: cursorY + 135 + "px"
+            }}></div>
              <img src={image1} />
         </div>
     );

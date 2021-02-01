@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
-import image1 from './1.jpeg';
+import image1 from './1.jpg';
+import image2 from './2.jpg';
 
 const Home = () => {
     const [data, setData] = useState([])
-    
+    const [cursorX, setCursorX] = useState()
+    const [cursorY, setCursorY] = useState()
+    const [imageName, setImageName] = useState()
+
+    window.addEventListener('mousemove', (e) => {
+        setCursorX(e.pageX - 100)
+        setCursorY(e.pageY - 150)
+    })
+
     const homeFetch = () => {
         fetch(`http://localhost:3000/api/articles`, {
         "method": "GET",
@@ -34,24 +43,29 @@ const Home = () => {
     useEffect(() => {
         homeFetch()
       }, [])
+
+      useEffect(() => {
+      }, [imageName])
     
-      const onMouseMove = (num) => {
-          console.log(num)
-            const cursor = document.querySelector(".cursor")
-            //cursor.style.left = `${e.pageX}px`
-            //cursor.style.top = `${e.pageY}px`
-            cursor.style.backgroundColor = "green"
-           // cursor.style.cursor = `url(src/assets/${num}.jpeg), auto`
-           cursor.style.cursor = "url(./1.jpeg), auto"
-            //cursor.style.cursor = 'url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/meh.png), auto'
-            //cursor.style.cursor = "pointer"
-        }
-    
+    const changeImage = (num) => {
+        console.log("DANS MOUSE OVER")
+        console.log(num)
+        setImageName("image"+num)
+    }
+
     return (
-        <div className="cursor">
-             {data.map(elt => <h1 className={`${elt.title[elt.title.length-1]}`} onMouseOver={() => onMouseMove(elt.title[elt.title.length-1])}>{elt.title}</h1>)}
-             {console.log("laa")}
-             {data.map(elt => console.log(elt.title[elt.title.length-1]))}
+        <div className="container" >
+            <div className="cursor" style={{
+                opacity: 0.5,
+                zIndex: 5,
+                backgroundImage: `url(${image2})`,
+                left: cursorX + "px",
+                top: cursorY + "px"
+            }}></div>
+            <ul style={{zIndex: 1}}>
+                 {data.map(elt => <li><h1 className={`${elt.title[elt.title.length-1]}`} onMouseOver={() => changeImage(elt.title[elt.title.length-1])}>{elt.title}</h1></li>)}
+             </ul>
+            
              <img src={image1} />
         </div>
     );

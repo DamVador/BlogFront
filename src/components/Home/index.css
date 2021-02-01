@@ -12,6 +12,18 @@ ul {
   flex-direction: column;
   justify-content: center;
 }
+.inList {
+  display: flex;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  border: 1px solid red;
+  flex-direction: column;
+}
 
 .cursor {
   width: 200px;

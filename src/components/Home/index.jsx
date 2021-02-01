@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './index.css';
 import image1 from './1.jpg';
 import image2 from './2.jpg';
+import image3 from './3.jpg';
+import image4 from './4.jpg';
 
 const Home = () => {
     const [data, setData] = useState([])
@@ -59,12 +61,18 @@ const Home = () => {
 
       useEffect(() => {
       }, [imageName])
-    
+    const tabImg = []
+    tabImg.push(image1)
+    tabImg.push(image2)
+    tabImg.push(image3)
+    tabImg.push(image4)
+
     const changeImage = (num) => {
+        const cursor = document.querySelector(".cursor")
         console.log("DANS MOUSE OVER")
-        setImageName("image"+num)
         console.log(num)
-        
+       // setImageName("image"+num)
+        cursor.style.backgroundImage = `url(${tabImg[num-1]})`
     }
 
    
@@ -78,9 +86,8 @@ const Home = () => {
                 left: cursorX + "px",
                 top: cursorY + "px"
             }}></div>
-            <ul style={{zIndex: 1}}>
-                 {data.map(elt => <li><h1 className={`pouet${elt.title[elt.title.length-1]}`} onMouseOver={() => changeImage(elt.title[elt.title.length-1])}>{elt.title}</h1></li>)}
-             </ul>
+                 {data.map(elt => <div className="inList" onMouseOver={() => changeImage(elt.title[elt.title.length-1])}><h1 className={`pouet${elt.title[elt.title.length-1]}`} >{elt.title}</h1></div>)}
+             
              <div className="cursor2" style={{
                 left: cursorX + 85 + "px",
                 top: cursorY + 135 + "px"

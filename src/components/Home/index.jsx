@@ -10,19 +10,11 @@ const Home = () => {
     const [imageName, setImageName] = useState()
 
 
-    const cursor = document.querySelector(".cursor2")
-
     window.addEventListener('mousemove', (e) => {
         setCursorX(e.pageX - 100)
         setCursorY(e.pageY - 150)
     })
-
-    document.addEventListener('click', (e) => {
-        cursor.classList.add("expand");
-        setTimeout(() => {
-            cursor.classList.remove("expand");
-        }, 500)
-    })
+   
 
     const homeFetch = () => {
         fetch(`http://localhost:3000/api/articles`, {
@@ -50,8 +42,19 @@ const Home = () => {
         })
     }
 
+    const event = () => {
+        const cursor = document.querySelector(".cursor2")
+        document.addEventListener('click', () => {
+            cursor.classList.add("expand");
+            setTimeout(() => {
+                cursor.classList.remove("expand");
+            }, 500)
+        })
+    }
+
     useEffect(() => {
         homeFetch()
+        event()
       }, [])
 
       useEffect(() => {
@@ -59,9 +62,12 @@ const Home = () => {
     
     const changeImage = (num) => {
         console.log("DANS MOUSE OVER")
-        console.log(num)
         setImageName("image"+num)
+        console.log(num)
+        
     }
+
+   
 
     return (
         <div className="container" >
@@ -73,7 +79,7 @@ const Home = () => {
                 top: cursorY + "px"
             }}></div>
             <ul style={{zIndex: 1}}>
-                 {data.map(elt => <li><h1 className={`${elt.title[elt.title.length-1]}`} onMouseOver={() => changeImage(elt.title[elt.title.length-1])}>{elt.title}</h1></li>)}
+                 {data.map(elt => <li><h1 className={`pouet${elt.title[elt.title.length-1]}`} onMouseOver={() => changeImage(elt.title[elt.title.length-1])}>{elt.title}</h1></li>)}
              </ul>
              <div className="cursor2" style={{
                 left: cursorX + 85 + "px",

@@ -78,17 +78,22 @@ const Home = () => {
        setBackground(tabImg[num-1])
     }
 
-    const handleMouseHover = (bool, num, e) => {
+    const handleMouseHover = (bool, num) => {
+        const cursor = document.querySelector(".cursor");
         setIsHovering(bool)
+
         if(bool === true ){
             setBackground(tabImg[num-1]);
            const div =  document.querySelector(`.pouet${num}`);
            div.style.color = "red";
             setPreviousDiv(div)
+            
+            cursor.style.display = "block";
           //  console.log(document.querySelector(`.pouet${num}`))
         } else {
             console.log(previousDiv)
             previousDiv.style.color = "black";
+            cursor.style.display = "none";
         }
       };
    
@@ -99,14 +104,15 @@ const Home = () => {
                 opacity: 1,
                 backgroundImage: `url(${background})`,
                 left: cursorX + "px",
-                top: cursorY + "px"
+                top: cursorY + "px",
+                display: "none"
             }}></div>
 
                  {/* {data.map(elt => <div className="inList" onMouseMove={(e) => changeImage(e, elt.title[elt.title.length-1])} ><h1 className={`pouet${elt.title[elt.title.length-1]}`} >{elt.title}</h1></div>)} */}
                  {data.map(elt => <div className="inList" onMouseEnter={() => handleMouseHover(true, elt.title[elt.title.length-1])}
           onMouseLeave={() => handleMouseHover(false)} ><h1 className={`pouet${elt.title[elt.title.length-1]}`}  >{elt.title}</h1> <div className="hover-reveal">
         <div className="hover-reveal__inner">
-            {isHovering === true && <div className="hover-reveal__img" style={{ backgroundImage: `url(${background})`}}></div>}
+            {isHovering === true && <div className="hover-reveal__img" ></div>}
         </div>
     </div>   </div>)}
              <div className="cursor2" style={{

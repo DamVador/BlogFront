@@ -9,9 +9,9 @@ const Home = () => {
     const [data, setData] = useState([])
     const [cursorX, setCursorX] = useState()
     const [cursorY, setCursorY] = useState()
-    const boxRef = React.useRef(null);
     const [background, setBackground] = useState();
     const [isHovering, setIsHovering] = useState(false);
+    const [previousDiv, setPreviousDiv] = useState();
     window.addEventListener('mousemove', (e) => {
         setCursorX(e.pageX - 100)
         setCursorY(e.pageY - 150)
@@ -78,37 +78,23 @@ const Home = () => {
        setBackground(tabImg[num-1])
     }
 
-    const onmouseout = () => {
-        const cursor = document.querySelector(".cursor")
-        cursor.style.display = "none";
-    }
-
-    const test = (bool) => {
-        const div =  document.querySelector(".divtest");
-        div.addEventListener("mousemove", (e) => {
-            console.log(e.clientX)
-            div.style.backgroundColor = "red";
-        })
-    }
-
-    const mouseMove = (e) => {
-        //console.log(e.clientX, e.clientY)
-       // console.log(boxRef);
-       const cursor = document.querySelector(".cursor")
-        
-
-    }
-
-    const handleMouseHover = (bool, num) => {
+    const handleMouseHover = (bool, num, e) => {
         setIsHovering(bool)
         if(bool === true ){
             setBackground(tabImg[num-1]);
+           const div =  document.querySelector(`.pouet${num}`);
+           div.style.color = "red";
+            setPreviousDiv(div)
+          //  console.log(document.querySelector(`.pouet${num}`))
+        } else {
+            console.log(previousDiv)
+            previousDiv.style.color = "black";
         }
       };
    
 
     return (
-        <div className="container" onMouseMove={mouseMove} >
+        <div className="container" >
             <div className="cursor" style={{
                 opacity: 1,
                 backgroundImage: `url(${background})`,
@@ -117,19 +103,16 @@ const Home = () => {
             }}></div>
 
                  {/* {data.map(elt => <div className="inList" onMouseMove={(e) => changeImage(e, elt.title[elt.title.length-1])} ><h1 className={`pouet${elt.title[elt.title.length-1]}`} >{elt.title}</h1></div>)} */}
-                 {data.map(elt => <div className="inList"  ref={boxRef} onMouseEnter={() => handleMouseHover(true, elt.title[elt.title.length-1])}
+                 {data.map(elt => <div className="inList" onMouseEnter={() => handleMouseHover(true, elt.title[elt.title.length-1])}
           onMouseLeave={() => handleMouseHover(false)} ><h1 className={`pouet${elt.title[elt.title.length-1]}`}  >{elt.title}</h1> <div className="hover-reveal">
         <div className="hover-reveal__inner">
             {isHovering === true && <div className="hover-reveal__img" style={{ backgroundImage: `url(${background})`}}></div>}
         </div>
     </div>   </div>)}
-                 {/* {data.map(elt => <div className="inList" onMouseEnter={changeImage(true)} onMouseLeave={changeImage(false)}><h1 className={`pouet${elt.title[elt.title.length-1]}`} >{elt.title}</h1></div>)} */}
-            <div className="divtest"  ><button >Test</button></div>
              <div className="cursor2" style={{
                 left: cursorX + 85 + "px",
                 top: cursorY + 135 + "px",
             }}></div>
-             <img style={{display: "none"}} src={image1} />
         </div>
     );
 }

@@ -38,8 +38,9 @@ ul {
   background-color: lightgray;
   border-radius: 5%;
   position: absolute;
-  transition-duration: 400ms;
+  transition-duration: 500ms;
   transition-timing-function: ease-out;
+  animation: cursorAnim .5s infinite alternate;
 }
 
 .cursor2 {
@@ -49,7 +50,7 @@ ul {
   background-color: lightgray;
   border-radius: 50%;
   position: absolute;
-  transition-duration: 300ms;
+  transition-duration: 400ms;
   transition-timing-function: ease-out;
 }
 
@@ -71,11 +72,17 @@ ul {
   border: 1px solid red;
 }
 
-// @for $i from 1 through 3 {
-//   .pouet#{$i} .cursor{
-//     background-image: url(./#{$i}.jpg);
-//   }
+cursor:hover {
 
+}
+
+// @keyframes cursorAnim {
+//   from {
+//       transform: rotateZ(0deg);
+//   }
+//   to {
+//     transform: rotateZ(10deg);
+//   }
 // }
 
 @keyframes cursorAnim2 {

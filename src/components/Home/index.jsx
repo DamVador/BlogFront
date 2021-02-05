@@ -96,6 +96,15 @@ const Home = () => {
         }
       };
    
+      var direction = "";
+    var oldx = 0;
+    var oldy = 0;
+    const mouseMove =  (e) => {
+        const cursor = document.querySelector(".cursor");
+        e.clientX - window.innerWidth/2 > 0 ? cursor.style.transform = "rotateZ(10deg)" : cursor.style.transform = "rotateZ(-10deg)"
+    }
+
+// document.querySelector(".cursor").addEventListener('mousemove', mouseMove);
 
     return (
         <div className="container" >
@@ -107,16 +116,11 @@ const Home = () => {
                 display: "none"
             }}></div>
 
-            {/* {data.map(elt => <div className="inList" onMouseMove={(e) => changeImage(e, elt.title[elt.title.length-1])} ><h1 className={`pouet${elt.title[elt.title.length-1]}`} >{elt.title}</h1></div>)} */}
+            {/* {data.map(elt => <div className="inList" onMouseOver={() => changeImage( elt.title[elt.title.length-1])} ><h1 className={`pouet${elt.title[elt.title.length-1]}`} >{elt.title}</h1></div>)} */}
             {data.map(elt => 
             <div className="inList" onMouseEnter={() => handleMouseHover(true, elt.title[elt.title.length-1])}
-                    onMouseLeave={() => handleMouseHover(false)} >
-                        <h1 className={`pouet${elt.title[elt.title.length-1]}`}  >{elt.title}</h1> 
-                        <div className="hover-reveal">
-                        <div className="hover-reveal__inner">
-                                {isHovering === true && <div className="hover-reveal__img" ></div>}
-                        </div>
-                        </div>   
+                    onMouseLeave={() => handleMouseHover(false)} onMouseMove={mouseMove}>
+                        <h1 className={`pouet${elt.title[elt.title.length-1]}`}  >{elt.title}</h1>           
                 </div>)}
 
              <div className="cursor2" style={{
@@ -129,3 +133,11 @@ const Home = () => {
 }
 
 export default Home
+
+//brouillon 
+
+{/* <div className="hover-reveal">
+<div className="hover-reveal__inner">
+        {isHovering === true && <div className="hover-reveal__img" ></div>}
+</div>
+</div>    */}

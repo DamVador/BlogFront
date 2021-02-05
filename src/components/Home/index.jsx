@@ -93,7 +93,6 @@ const Home = () => {
             console.log(previousDiv)
             previousDiv.style.color = "black";
             cursor.style.display = "none";
-           
         }
       };
    

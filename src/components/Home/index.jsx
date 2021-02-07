@@ -127,7 +127,7 @@ const Home = () => {
             {data.map(elt => 
             <div className="inList" onMouseEnter={() => handleMouseHover(true, elt.title[elt.title.length-1])}
                     onMouseLeave={() => handleMouseHover(false)} onMouseMove={mouseMoving}>
-                        <h1 className={`pouet${elt.title[elt.title.length-1]}`}  >{elt.title}</h1>           
+                        <h1 className={`pouet${elt.title[elt.title.length-1]}`}  ><div className="articleTitle">{elt.title}</div></h1>           
                 </div>)}
 
              <div className="cursor2" style={{

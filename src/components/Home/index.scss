@@ -67,14 +67,15 @@ ul {
   animation: cursorAnim2 .5s infinite alternate;
 }
 
+.articleTitle {
+  cursor: pointer;
+}
+
 .expand {
   animation: cursorAnim3 .5s forwards;
   border: 1px solid red;
 }
 
-cursor:hover {
-
-}
 
 // @keyframes cursorAnim {
 //   from {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './index.scss';
+import Navbar from "../Navbar"
 import image1 from './1.jpg';
 import image2 from './2.jpg';
 import image3 from './3.jpg';
@@ -13,7 +14,7 @@ const Home = () => {
     const [isHovering, setIsHovering] = useState(false);
     const [previousDiv, setPreviousDiv] = useState();
     const [mouseMove, setMouseMove] = useState(false);
-
+    
     window.addEventListener('mousemove', (e) => {
         setCursorX(e.pageX - 100)
         setCursorY(e.pageY - 150)
@@ -61,7 +62,7 @@ const Home = () => {
         event()
         var timer;
         var timeout = function () {
-            document.querySelector(".cursor").style.transform = "rotateZ(0deg)"
+           document.querySelector(".cursor").style.transform = "rotateZ(0deg)";
         }
         timer = setTimeout(timeout, 250);
         window.onmousemove = function() {
@@ -99,6 +100,8 @@ const Home = () => {
            div.style.color = "red";
             setPreviousDiv(div)
             cursor.style.display = "block";
+            //  cursor.style.zindex = "3";
+            //  div.style.zindex = "4";
         } else {
             console.log(previousDiv)
             previousDiv.style.color = "black";
@@ -109,12 +112,24 @@ const Home = () => {
     const mouseMoving =  (e) => {
         setMouseMove(true)
         const cursor = document.querySelector(".cursor");
-        e.clientX - window.innerWidth/2 > 0 ? cursor.style.transform = "rotateZ(8deg)" : cursor.style.transform = "rotateZ(-8deg)"
+        e.clientX - window.innerWidth/2 > 0 ? cursor.style.transform = "rotateZ(1deg)" : cursor.style.transform = "rotateZ(-1deg)"
         
     }
 
     return (
+    <>
+        <Navbar/>
         <div className="container" >
+
+           
+            {/* {data.map(elt => <div className="inList" onMouseOver={() => changeImage( elt.title[elt.title.length-1])} ><h1 className={`pouet${elt.title[elt.title.length-1]}`} >{elt.title}</h1></div>)} */}
+            {data.map(elt => 
+            <div className="inList" onMouseEnter={() => handleMouseHover(true, elt.title[elt.title.length-1])}
+                    onMouseLeave={() => handleMouseHover(false)} onMouseMove={mouseMoving}>
+                        <h1 className={`pouet${elt.title[elt.title.length-1]}`}  ><div className="articleTitle">{elt.title}</div></h1>           
+                </div>)}
+        
+
             <div className="cursor" style={{
                 opacity: 1,
                 backgroundImage: `url(${background})`,
@@ -123,19 +138,13 @@ const Home = () => {
                 display: "none"
             }} ></div>
 
-            {/* {data.map(elt => <div className="inList" onMouseOver={() => changeImage( elt.title[elt.title.length-1])} ><h1 className={`pouet${elt.title[elt.title.length-1]}`} >{elt.title}</h1></div>)} */}
-            {data.map(elt => 
-            <div className="inList" onMouseEnter={() => handleMouseHover(true, elt.title[elt.title.length-1])}
-                    onMouseLeave={() => handleMouseHover(false)} onMouseMove={mouseMoving}>
-                        <h1 className={`pouet${elt.title[elt.title.length-1]}`}  ><div className="articleTitle">{elt.title}</div></h1>           
-                </div>)}
-
              <div className="cursor2" style={{
                     left: cursorX + 85 + "px",
                     top: cursorY + 135 + "px",
                     }}>
             </div>
         </div>
+    </>
     );
 }
 

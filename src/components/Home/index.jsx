@@ -117,8 +117,8 @@ const Home = () => {
     }
 
     return (
-    <>
-        <Navbar/>
+    <div className="page">
+        <div className="nav"><Navbar/></div>
         <div className="container" >
 
            
@@ -144,7 +144,7 @@ const Home = () => {
                     }}>
             </div>
         </div>
-    </>
+    </div>
     );
 }
 

@@ -76,16 +76,18 @@ ul {
   cursor: pointer;
 }
 
-// .articleTitle:hover {
-//   position: absolute;
-//   z-index: 2;
-// }
-
 .expand {
   animation: cursorAnim3 .5s forwards;
   border: 1px solid red;
 }
 
+.nav {
+  position: relative;
+}
+
+.nav:hover {
+  z-index: 2;
+}
 
 @keyframes cursorAnim {
   0% {

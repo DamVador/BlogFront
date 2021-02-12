@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import './index.scss';
 import Navbar from "../Navbar"
+import Sidebar from "../Sidebar"
 import image1 from './1.jpg';
 import image2 from './2.jpg';
 import image3 from './3.jpg';
@@ -60,15 +62,17 @@ const Home = () => {
     useEffect(() => {
         homeFetch()
         event()
-        var timer;
-        var timeout = function () {
-           document.querySelector(".cursor").style.transform = "rotateZ(0deg)";
-        }
-        timer = setTimeout(timeout, 250);
-        window.onmousemove = function() {
-            clearTimeout(timer);
-            timer = setTimeout(timeout, 250);
-        };
+        // ROTATION
+        // let timer;
+        // let timeout = function () {
+        //    document.querySelector(".cursor").style.transform = "rotateZ(0deg)";
+        // }
+        // timer = setTimeout(timeout, 250);
+        // window.onmousemove = function() {
+        //     clearTimeout(timer);
+        //     timer = setTimeout(timeout, 250);
+        // };
+        //////////
       }, [])
 
 
@@ -103,22 +107,21 @@ const Home = () => {
             //  cursor.style.zindex = "3";
             //  div.style.zindex = "4";
         } else {
-            console.log(previousDiv)
+            //console.log(previousDiv)
             previousDiv.style.color = "black";
             cursor.style.display = "none";
         }
       };
-   
+   //ROTATION
     const mouseMoving =  (e) => {
         setMouseMove(true)
         const cursor = document.querySelector(".cursor");
-        e.clientX - window.innerWidth/2 > 0 ? cursor.style.transform = "rotateZ(1deg)" : cursor.style.transform = "rotateZ(-1deg)"
+       // e.clientX - window.innerWidth/2 > 0 ? cursor.style.transform = "rotateZ(1deg)" : cursor.style.transform = "rotateZ(-1deg)"
         
     }
-
+///////////
     return (
     <div className="page">
-        <div className="nav"><Navbar/></div>
         <div className="container" >
 
            
@@ -126,9 +129,10 @@ const Home = () => {
             {data.map(elt => 
             <div className="inList" onMouseEnter={() => handleMouseHover(true, elt.title[elt.title.length-1])}
                     onMouseLeave={() => handleMouseHover(false)} onMouseMove={mouseMoving}>
-                        <h1 className={`pouet${elt.title[elt.title.length-1]}`}  ><div className="articleTitle">{elt.title}</div></h1>           
+                        <Link to={`/articles/${elt.title[elt.title.length-1]}`} style={{textDecoration: "none"}}>
+                        <h1 className={`pouet${elt.title[elt.title.length-1]}`} onClick={() => console.log(`clicked on article ${elt.title[elt.title.length-1]}`)}><div className="articleTitle">{elt.title}</div></h1>           
+                        </Link>
                 </div>)}
-        
 
             <div className="cursor" style={{
                 opacity: 1,
@@ -149,11 +153,3 @@ const Home = () => {
 }
 
 export default Home
-
-//brouillon 
-
-{/* <div className="hover-reveal">
-<div className="hover-reveal__inner">
-        {isHovering === true && <div className="hover-reveal__img" ></div>}
-</div>
-</div>    */}

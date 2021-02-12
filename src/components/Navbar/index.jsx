@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './index.css';
 import profileIcon from "../../assets/profileIcon.svg"
 import homeIcon from "../../assets/home.svg"
+import { withRouter, useHistory, Link } from "react-router-dom";
 
 const Navbar = () => {
 
@@ -18,9 +19,11 @@ const Navbar = () => {
     return (
         <div className="navbar">
             <div className="leftSide">
+                <Link to={"/"}>
                 <div className="homeButton" >
-                     <img className="homeButtonImg" src={homeIcon} alt="icon" onClick={() => alert('clicked')}/>
+                     <img className="homeButtonImg" src={homeIcon} alt="icon" />
                 </div>
+                </Link>
                 <div className="profileButton">
                      <img className="profileButtonImg" src={profileIcon} alt="icon" />
                 </div>

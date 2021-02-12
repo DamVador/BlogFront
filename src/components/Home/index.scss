@@ -80,9 +80,13 @@ ul {
   animation: cursorAnim3 .5s forwards;
   border: 1px solid red;
 }
-
+.page {
+  display: flex;
+  flex-direction: column;
+}
 .nav {
   position: relative;
+  z-index: 9;
 }
 
 .nav:hover {

@@ -2,7 +2,7 @@
 .navbar{
     display: flex;
     justify-content: space-between;
-    background-color: hsl(46, 68%, 90%)
+    background-color: hsl(47, 79%, 87%);
 }
 
 .leftSide {

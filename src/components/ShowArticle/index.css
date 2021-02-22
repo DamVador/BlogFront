@@ -1,0 +1,15 @@
+.articleTitle {
+    text-align: center;
+}
+
+.showArticle {
+    border: 2px solid green;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.content{
+    text-align: center;
+}
